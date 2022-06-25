@@ -21,20 +21,23 @@ class Example(QWidget):
         qle.textChanged[str].connect(self.onChanged)
         qle.move(0, 40) 
         
-        # 其他复杂控件
+        # 多选
         self.initCombox()
+        # 单选
         self.checkBox()
         
         self.setGeometry(300, 300, 320, 240)
         self.setWindowTitle('QLineEdit')
         self.show()
         
+    # 单选
     def checkBox(self):
         ckBox = QCheckBox('显示图片',self)
         ckBox.stateChanged.connect(self.changeCheckBox)
         ckBox.toggle() # 默认选中
         ckBox.move(0,20)
     
+    # 多选框
     def initCombox(self):
         combo = QComboBox(self)
         combo.addItem("Ubuntu")
@@ -42,14 +45,17 @@ class Example(QWidget):
         combo.addItem("Gentoo")        
         combo.activated[str].connect(self.onActivated)          
 
+    # 单行输入框
     def onChanged(self, text):
         self.lbl.setText(text)
         self.lbl.adjustSize()   
     
+    # 多选框
     def onActivated(self, text):
         self.lbl.setText(text)
         self.lbl.adjustSize()  
-        
+    
+    # 单选
     def changeCheckBox(self, state):
         if state == Qt.Checked:
             self.setPic()
